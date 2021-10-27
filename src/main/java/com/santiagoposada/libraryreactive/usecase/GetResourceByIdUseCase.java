@@ -13,11 +13,11 @@ import java.util.function.Function;
 
 @Service
 @Validated
-public class GetResourceById implements Function<String, Mono<ResourceDTO>> {
+public class GetResourceByIdUseCase implements Function<String, Mono<ResourceDTO>> {
     private ResourceMapper resourceMapper;
     private ResourceRepository resourceRepository;
 
-    public GetResourceById(ResourceMapper resourceMapper, ResourceRepository resourceRepository){
+    public GetResourceByIdUseCase(ResourceMapper resourceMapper, ResourceRepository resourceRepository){
         this.resourceMapper = resourceMapper;
         this.resourceRepository = resourceRepository;
     }

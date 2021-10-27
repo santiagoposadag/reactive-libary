@@ -24,7 +24,6 @@ public class CreateResourceUseCase implements CreateResource{
 
     @Override
     public Mono<ResourceDTO> apply(ResourceDTO resourceDTO) {
-        Objects.requireNonNull(resourceDTO.getId());
         return resourceRepository.save(resourceMapper.fromResourceDTOtoEntity().apply(resourceDTO))
                 .map(resource -> resourceMapper.fromResourceEntityToDTO().apply(resource));
     }

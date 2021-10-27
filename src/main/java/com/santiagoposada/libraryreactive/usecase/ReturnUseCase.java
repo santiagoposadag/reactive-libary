@@ -2,19 +2,24 @@ package com.santiagoposada.libraryreactive.usecase;
 
 import com.santiagoposada.libraryreactive.mapper.ResourceMapper;
 import com.santiagoposada.libraryreactive.repository.ResourceRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 import java.util.function.Function;
 
-public class ReturnResourceUseCase implements Function<String, Mono<String>> {
+
+@Service
+@Validated
+public class ReturnUseCase implements Function<String, Mono<String>> {
 
 
     private ResourceMapper resourceMapper;
     private ResourceRepository resourceRepository;
     private UpdateUseCase updateUseCase;
 
-    public ReturnResourceUseCase(ResourceMapper resourceMapper, ResourceRepository resourceRepository, UpdateUseCase updateUseCase){
+    public ReturnUseCase(ResourceMapper resourceMapper, ResourceRepository resourceRepository, UpdateUseCase updateUseCase){
         this.resourceMapper = resourceMapper;
         this.resourceRepository = resourceRepository;
         this.updateUseCase = updateUseCase;

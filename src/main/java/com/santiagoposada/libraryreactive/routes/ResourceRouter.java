@@ -1,6 +1,7 @@
 package com.santiagoposada.libraryreactive.routes;
 
 import com.santiagoposada.libraryreactive.dto.ResourceDTO;
+import com.santiagoposada.libraryreactive.usecase.ReturnUseCase;
 import com.santiagoposada.libraryreactive.usecase.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +42,7 @@ public class ResourceRouter {
     }
 
     @Bean
-    public RouterFunction<ServerResponse> getResourceById(GetResourceById getResourceById){
+    public RouterFunction<ServerResponse> getResourceById(GetResourceByIdUseCase getResourceById){
         //.and(accept(MediaType.APPLICATION_JSON))
         return route(GET("/resource/{id}"),
                 request -> ServerResponse.ok()
@@ -98,5 +99,23 @@ public class ResourceRouter {
                 request -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
                         .body(BodyInserters.fromPublisher(getByCategoryUseCase.apply(request.pathVariable("category")), ResourceDTO.class)));
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> borrowResourceRoute(BorrowResourceUseCase borrowResourceUseCase){
+        return route(
+                PUT("/borrow/{id}"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(borrowResourceUseCase.apply(request.pathVariable("id")), String.class)));
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> returnRoute(ReturnUseCase returnUseCase){
+        return route(
+                PUT("/return/{id}"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(returnUseCase.apply(request.pathVariable("id")), String.class)));
     }
 }

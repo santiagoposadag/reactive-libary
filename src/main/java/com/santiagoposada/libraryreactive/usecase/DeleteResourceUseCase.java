@@ -12,11 +12,11 @@ import java.util.function.Function;
 
 @Service
 @Validated
-public class DeleteResource implements Function<String, Mono<Void>> {
+public class DeleteResourceUseCase implements Function<String, Mono<Void>> {
     private ResourceMapper resourceMapper;
     private ResourceRepository resourceRepository;
 
-    public DeleteResource(ResourceMapper resourceMapper, ResourceRepository resourceRepository){
+    public DeleteResourceUseCase(ResourceMapper resourceMapper, ResourceRepository resourceRepository){
         this.resourceMapper = resourceMapper;
         this.resourceRepository = resourceRepository;
     }
